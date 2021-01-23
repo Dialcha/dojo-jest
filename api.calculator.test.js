@@ -19,4 +19,23 @@ describe("testing /add path", () => {
             done();
         })
     })
+
+    test("it should return a valid json object content", done => {
+        request(app)
+        .get("/add?a=1&b=1")
+        .then(response => {
+            expect(response.body).not.toBeNull();
+            expect(response.body.result).not.toBeUndefined();
+            done();
+        })
+    })
+
+    test("it should return a correct answer", done => {
+        request(app)
+        .get("/add?a=1&b=4")
+        .then(response => {
+            expect(response.body.result).toBe(5);
+            done();
+        })
+    })
 })
